@@ -15,7 +15,7 @@
       "SupportedInMultiActions": false,
       "Tooltip": "Cartwall", 
       "UUID": "com.mairlist.automation.actions.cart",
-	  "PropertyInspectorPath": "pi/cart/index.html"
+      "PropertyInspectorPath": "pi/cart/index.html"
     }
   ], 
   "SDKVersion": 2,

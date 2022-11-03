@@ -2,20 +2,39 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <title>com.elgato.sample PI</title>
-    <link rel="stylesheet" href="../css/sdpi.css">
+  <meta charset="utf-8" />
+  <title>com.mairlist.automation.actions.cart PI</title>
+  <link rel="stylesheet" href="../css/sdpi.css">
 </head>
 
 <body>
-	<div class="sdpi-wrapper">
-		<div class="sdpi-item" id="number">
-			<div class="sdpi-item-label">Cart Number</div>
-				<input class="sdpi-item-value" id="cartNumber" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
-		</div>
+  <div class="sdpi-wrapper">
+  
+    <!--- Action Settings --->
+  
+    <div class="sdpi-item">
+      <div class="sdpi-item-label">Cart Number</div>
+      <input class="sdpi-item-value" id="cartNumber" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
     </div>
 
-    <script src="../../plugin/definitions.js"></script>
-    <script src="pi.js"></script>
+    <!--- Global Settings --->
+    
+    <div class="sdpi-heading">mAirList Connection Settings</div>
+
+    <div class="sdpi-item">
+      <div class="sdpi-item-label">Host/IP</div>
+      <input class="sdpi-item-value" id="host" placeholder="127.0.0.1" onChange="updateGlobalSettings()">
+    </div>
+
+    <div class="sdpi-item">
+      <div class="sdpi-item-label">Port</div>
+      <input class="sdpi-item-value" id="port" placeholder="10810" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateGlobalSettings()">
+    </div>
+  </div>
+
+  <script src="../../plugin/definitions.js"></script>
+  <script src="../global.js"></script>
+  <script src="pi.js"></script>
 </body>
+
 </html>
