@@ -2,7 +2,7 @@
 {
   "Actions": [
     {
-      "Icon": "actionIcon", 
+      "Icon": "icons/actions/cart", 
       "Name": "Cart Player", 
       "States": [
         {
