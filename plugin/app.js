@@ -3,8 +3,7 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
   // Open the web socket
   var websocket = new WebSocket("ws://127.0.0.1:" + inPort);
 
-  var upstream = new UpstreamConnection();
-  upstream.addEventListener('sendToSD', function(payload) {
+  var upstream = new UpstreamConnection(function(payload) {
     websocket.send(JSON.stringify(payload));
   });
 

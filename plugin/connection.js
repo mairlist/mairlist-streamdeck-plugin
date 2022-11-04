@@ -1,9 +1,9 @@
 // Class which handles the upstream connection to mAirList
-class UpstreamConnection extends Emitter {
+class UpstreamConnection {
 
   // Constructor
-  constructor() {
-    super();
+  constructor(sendToSD) {
+    this.sendToSD = sendToSD; // Callback function to send payload to SD
     
     this.connected = false;
     this.websocket = null;
@@ -18,10 +18,6 @@ class UpstreamConnection extends Emitter {
   }
   
   // Helper functions
-  sendToSD(payload) {
-    this.emit("sendToSD", payload);
-  }
-  
   sendUpstream(payload) {
     if (this.connected) {
       this.websocket.send(JSON.stringify(payload));
@@ -191,5 +187,7 @@ class UpstreamConnection extends Emitter {
   // Called before shutdown
   shutdown() {
     this.shuttingDown = true;
+    this.websocket.close();
+    this.updateAllActions(); // To reflect disconnected state
   }
 }
