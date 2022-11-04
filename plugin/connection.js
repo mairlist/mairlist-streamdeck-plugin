@@ -7,6 +7,7 @@ class UpstreamConnection extends Emitter {
     
     this.connected = false;
     this.websocket = null;
+    this.shuttingDown = false;
     this.settings = {};
     this.actions = {
       [ACTION_CART]: {}
@@ -44,7 +45,7 @@ class UpstreamConnection extends Emitter {
       }, CONNECT_INTERVAL);
     }
   
-    if (shuttingDown) {
+    if (this.shuttingDown) {
       return;
     }
 
@@ -66,13 +67,13 @@ class UpstreamConnection extends Emitter {
       console.log("Upstream connection error");
       this.connected = false;
       this.updateAllActions();
-      if (! shuttingDown) 
+      if (! this.shuttingDown) 
         tryReconnect();
     }
 
     this.websocket.onclose = () => {
       this.connected = false;
-      if (! shuttingDown) {
+      if (! this.shuttingDown) {
         // Update actions to reflect disconnected state
         this.updateAllActions();
         // Try to reconnect
@@ -187,4 +188,8 @@ class UpstreamConnection extends Emitter {
     }
   }
   
+  // Called before shutdown
+  shutdown() {
+    this.shuttingDown = true;
+  }
 }
