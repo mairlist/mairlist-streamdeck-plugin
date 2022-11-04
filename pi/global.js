@@ -1,9 +1,7 @@
 function updateGlobalSettings() {
-  console.log('updateGlobalSettings');
   var settings = {};
   settings.host = document.getElementById('host').value;
   settings.port = document.getElementById('port').value;
-  console.log(settings);
 
   const json = {
     'event': 'setGlobalSettings',
@@ -14,10 +12,9 @@ function updateGlobalSettings() {
 }
 
 function processGlobalSettings(settings) {
-  console.log('processGlobalSettings');
-  console.log(settings);
-  if (settings.host)
-    document.getElementById('host').value = settings.host;
-  if (settings.port)
-    document.getElementById('port').value = settings.port;
+  document.getElementById('host').placeholder = DEFAULT_HOST;
+  document.getElementById('host').value = settings.host || "";
+
+  document.getElementById('port').placeholder = DEFAULT_PORT;
+  document.getElementById('port').value = settings.port || "";
 }
