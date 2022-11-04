@@ -19,7 +19,7 @@
   ], 
   "SDKVersion": 2,
   "Author": "mairlist GmbH", 
-  "CodePath": "index.html", 
+  "CodePath": "plugin/index.html", 
   "PropertyInspectorPath": "pi/index.html",
   "Description": "Remote control for mAirList Radio Automation.", 
   "Name": "mAirList", 
