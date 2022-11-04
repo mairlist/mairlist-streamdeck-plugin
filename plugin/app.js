@@ -1,12 +1,9 @@
 // Main function, connection handling to SD
 function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, inInfo) {
+  var upstream = null;
+
   // Open the web socket
   var websocket = new WebSocket("ws://127.0.0.1:" + inPort);
-
-  var upstream = new UpstreamConnection(function(payload) {
-    websocket.send(JSON.stringify(payload));
-  });
-
 
   websocket.onopen = function() {
     // Register
@@ -15,6 +12,11 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
       "uuid": inPluginUUID
     }));
     
+    // Create upstream connection
+    upstream = new UpstreamConnection(function(payload) {
+      websocket.send(JSON.stringify(payload));
+    });
+
     // Request global settings
     websocket.send(JSON.stringify({
       "event": "getGlobalSettings",
