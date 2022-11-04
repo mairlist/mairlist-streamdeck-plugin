@@ -170,6 +170,12 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
   // Open the web socket
   websocket = new WebSocket("ws://127.0.0.1:" + inPort);
 
+  var upstream2 = new UpstreamConnection();
+  upstream2.addEventListener('sendToSD', function(payload) {
+    websocket.send(JSON.stringify(payload));
+  });
+
+
   websocket.onopen = function() {
     // Register
     sendDownstream({
@@ -189,62 +195,22 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
     var data = JSON.parse(evt.data);
     
     if (data.event == "willAppear") {
-      // Prepare dictionary object
-      if (actions[data.action] == undefined) {
-        actions[data.action] = {};
-      }
-      actions[data.action][data.context] = data.payload.settings;
-      
-      if (data.action == ACTION_CART) {
-        updateCartAction(data.context);
-      }
+      upstream2.willAppear(data);
     }
     else if (data.event == "willDisappear") {
-      // Prepare dictionary object
-      if (actions[data.action] == undefined) {
-        actions[data.action] = {};
-      }
-      delete actions[data.action][data.context];
+      upstream2.willDisapper(data);
     }
     else if (data.event == "keyDown") {
-      if (data.action == ACTION_CART) {
-        cartNumber = data.payload.settings.cartNumber;
-        if (cartNumber != undefined) {
-          executeCommand("CARTWALL " + cartNumber + " CLICK");
-        }
-      }
+      upstream2.keyDown(data);
+    }
+    else if (data.event == "keyUp") {
+      upstream2.keyUp(data);
     }
     else if (data.event == "didReceiveSettings") {
-      // Prepare dictionary object
-      if (actions[data.action] == undefined) {
-        actions[data.action] = {};
-      }
-      actions[data.action][data.context] = data.payload.settings;
-
-      if (data.action == ACTION_CART) {
-        updateCartAction(data.context);
-      }
+      upstream2.didReceiveSettings(data);
     }
     else if (data.event == "didReceiveGlobalSettings") {
-
-      // Check if we have to reconnect because host/port changed      
-      var mustReconnect = 
-        (data.payload.settings.host != globalSettings.host) ||
-        (data.payload.settings.port != globalSettings.port);
-        
-      // Store new global settings
-      globalSettings = data.payload.settings;
-
-      // Reconnect if necessary     
-      if (mustReconnect) {
-        // Disconnect
-        if (upstreamConnected) {
-          upstream.close();
-          upstreamConnected = false;
-        }
-        // Start connection loop
-        connectUpstream();
-      }
+      upstream2.didReceiveGlobalSettings(data.payload.settings);
     }
   };
 
