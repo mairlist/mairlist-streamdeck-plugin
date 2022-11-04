@@ -12,9 +12,12 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
   actionInfo = JSON.parse(inActionInfo); // cache the info
   settings = actionInfo.payload.settings;
   websocket = new WebSocket('ws://127.0.0.1:' + inPort);
-
-  if (settings.cartNumber != undefined) {
-    document.getElementById("cartNumber").value = settings.cartNumber;
+  
+  switch (actionInfo.action) {
+    case ACTION_CART:
+      document.getElementById("settings-cart").style.display = "block";
+      document.getElementById("cart-number").value = settings.number || '';
+      break;
   }
 
   // if connection was established, the websocket sends
@@ -37,7 +40,6 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
 	websocket.onmessage = function (evt) {
 	
 		var data = JSON.parse(evt.data);
-		console.log(data);
 
 		if (data.event == "didReceiveGlobalSettings") {
 		  processGlobalSettings(data.payload.settings);
@@ -63,7 +65,14 @@ function sendValueToPlugin(value, param) {
 
 function updateSettings() {
   var settings = {};
-  settings.cartNumber = document.getElementById("cartNumber").value;
+  
+  console.log(actionInfo);
+
+  switch (actionInfo.action) {
+    case ACTION_CART:
+      settings.number = document.getElementById("cart-number").value;
+      break;
+  }
 
   const json = {
     "event": "setSettings",

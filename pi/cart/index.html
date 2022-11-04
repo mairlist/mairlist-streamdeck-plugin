@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>com.mairlist.automation.actions.cart PI</title>
+  <title>com.mairlist.automation PI</title>
   <link rel="stylesheet" href="../css/sdpi.css">
 </head>
 
@@ -11,10 +11,14 @@
   <div class="sdpi-wrapper">
   
     <!--- Action Settings --->
+    
+    <div id="settings-cart" style="display:none">
   
-    <div class="sdpi-item">
-      <div class="sdpi-item-label">Cart Number</div>
-      <input class="sdpi-item-value" id="cartNumber" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
+      <div class="sdpi-item">
+        <div class="sdpi-item-label">Cart Number</div>
+        <input class="sdpi-item-value" id="cart-number" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
+      </div>
+    
     </div>
 
     <!--- Global Settings --->

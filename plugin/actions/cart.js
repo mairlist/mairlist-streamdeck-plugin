@@ -8,7 +8,7 @@ class CartAction extends Action {
     super.update();
   
     // Check is the cart number is configured
-    var cartIndex = this.settings.cartNumber;
+    var cartIndex = this.settings.number;
     if (cartIndex == undefined) {
       return;
     }
@@ -62,8 +62,8 @@ class CartAction extends Action {
   keyDown() {
     super.keyDown();
     
-    if (this.settings.cartNumber)
-      this.connection.executeCommand("CARTWALL " + this.settings.cartNumber + " CLICK");
+    if (this.settings.number)
+      this.connection.executeCommand("CARTWALL " + this.settings.number + " CLICK");
   }
   
 }

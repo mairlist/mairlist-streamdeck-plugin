@@ -106,7 +106,7 @@ class UpstreamConnection {
         
         for (const ctx in this.actions[ACTION_CART]) {
           const action = this.actions[ACTION_CART][ctx];
-          if (action.settings.cartNumber == idx)
+          if (action.settings.number == idx)
             action.update();
         }
       }
