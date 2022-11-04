@@ -14,13 +14,13 @@
       ], 
       "SupportedInMultiActions": false,
       "Tooltip": "Cartwall", 
-      "UUID": "com.mairlist.automation.actions.cart",
-      "PropertyInspectorPath": "pi/cart/index.html"
+      "UUID": "com.mairlist.automation.actions.cart"
     }
   ], 
   "SDKVersion": 2,
   "Author": "mairlist GmbH", 
   "CodePath": "index.html", 
+  "PropertyInspectorPath": "pi/index.html",
   "Description": "Remote control for mAirList Radio Automation.", 
   "Name": "mAirList", 
   "Icon": "icons/pluginIcon", 
