@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>com.elgato.sample PI</title>
+    <link rel="stylesheet" href="../css/sdpi.css">
+</head>
+
+<body>
+	<div class="sdpi-wrapper">
+		<div class="sdpi-item" id="number">
+			<div class="sdpi-item-label">Cart Number</div>
+				<input class="sdpi-item-value" id="cartNumber" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
+		</div>
+    </div>
+
+    <script src="../../plugin/definitions.js"></script>
+    <script src="pi.js"></script>
+</body>
+</html>
