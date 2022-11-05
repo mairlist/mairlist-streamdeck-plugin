@@ -23,9 +23,9 @@
   "PropertyInspectorPath": "pi/index.html",
   "Description": "Remote control for mAirList Radio Automation.", 
   "Name": "mAirList", 
-  "Icon": "icons/pluginIcon", 
+  "Icon": "icons/plugin", 
   "Category": "mAirList", 
-  "CategoryIcon": "icons/categoryIcon", 
+  "CategoryIcon": "icons/category", 
   "URL": "https://www.mairlist.com", 
   "Version": "1.4",
   "OS": [
