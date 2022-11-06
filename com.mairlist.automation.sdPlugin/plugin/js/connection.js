@@ -10,7 +10,8 @@ class UpstreamConnection {
     this.shuttingDown = false;
     this.settings = {};
     this.actions = {
-      [ACTION_CART]: {}
+      [ACTION_CART]: {},
+      [ACTION_COMMAND]: {}
     };
     this.allActions = {};
     
@@ -123,6 +124,9 @@ class UpstreamConnection {
     switch (data.action) {
       case ACTION_CART:
         action = new CartAction(this, data.context, data.payload.settings); 
+        break;
+      case ACTION_COMMAND:
+        action = new CommandAction(this, data.context, data.payload.settings); 
         break;
       default:
         console.log("Unknown action type: " + data.action);

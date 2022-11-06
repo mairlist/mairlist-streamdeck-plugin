@@ -18,6 +18,10 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
       document.getElementById("settings-cart").style.display = "block";
       document.getElementById("cart-number").value = settings.number || '';
       break;
+    case ACTION_COMMAND:
+      document.getElementById("settings-command").style.display = "block";
+      document.getElementById("command-command").value = settings.command || '';
+      break;
   }
 
   // if connection was established, the websocket sends
@@ -90,6 +94,9 @@ function updateSettings() {
   switch (actionInfo.action) {
     case ACTION_CART:
       settings.number = document.getElementById("cart-number").value;
+      break;
+    case ACTION_COMMAND:
+      settings.command = document.getElementById("command-command").value;
       break;
   }
 

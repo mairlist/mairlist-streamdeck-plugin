@@ -3,3 +3,4 @@ const DEFAULT_PORT = 10810;
 const CONNECT_INTERVAL = 1000;
 
 const ACTION_CART = "com.mairlist.automation.actions.cart";
+const ACTION_COMMAND = "com.mairlist.automation.actions.command";

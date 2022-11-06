@@ -1,22 +1,5 @@
   
 {
-  "Actions": [
-    {
-      "Icon": "icons/actions/cart", 
-      "Name": "Cart Player", 
-      "States": [
-        {
-          "Image": "icons/state_transparent",
-          "ShowTitle": false,
-          "TitleAlignment": "bottom", 
-          "FontSize": "12"
-        }
-      ], 
-      "SupportedInMultiActions": false,
-      "Tooltip": "Cartwall", 
-      "UUID": "com.mairlist.automation.actions.cart"
-    }
-  ], 
   "SDKVersion": 2,
   "Author": "mairlist GmbH", 
   "CodePath": "plugin/index.html", 
@@ -41,5 +24,35 @@
   "Software": 
     {
         "MinimumVersion" : "4.1"
+    },
+
+  "Actions": [
+    {
+      "UUID": "com.mairlist.automation.actions.cart",
+      "Name": "Cart Player", 
+      "Icon": "icons/actions/cart", 
+      "States": [
+        {
+          "Image": "icons/state/cart",
+          "ShowTitle": false,
+          "TitleAlignment": "bottom", 
+          "FontSize": "12"
+        }
+      ], 
+      "SupportedInMultiActions": false,
+      "Tooltip": "Cartwall"
+    },
+    {
+      "UUID": "com.mairlist.automation.actions.command",
+      "Name": "Execute Command", 
+      "Icon": "icons/actions/command", 
+      "States": [
+        {
+          "Image": "icons/state/command"
+        }
+      ], 
+      "SupportedInMultiActions": false,
+      "Tooltip": "Execute Command"
     }
+  ]
 }
