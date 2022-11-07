@@ -36,9 +36,9 @@ class UpstreamConnection {
   // The big connection loop
   connectionLoop() {
   
-    const tryReconnect = function() {
+    const tryReconnect = function(self) {
       setTimeout(function() {
-        this.connectionLoop;
+        self.connectionLoop();
       }, CONNECT_INTERVAL);
     }
   
@@ -65,16 +65,17 @@ class UpstreamConnection {
       this.connected = false;
       this.updateAllActions();
       if (! this.shuttingDown) 
-        tryReconnect();
+        tryReconnect(this);
     }
 
     this.websocket.onclose = () => {
+      console.log("Upstream connection lost");
       this.connected = false;
       if (! this.shuttingDown) {
         // Update actions to reflect disconnected state
         this.updateAllActions();
         // Try to reconnect
-        tryReconnect();
+        tryReconnect(this);
       }
     }
   
