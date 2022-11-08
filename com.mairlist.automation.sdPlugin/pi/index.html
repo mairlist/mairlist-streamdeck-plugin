@@ -17,6 +17,11 @@
         <div class="sdpi-item-label">Cart Number</div>
         <input class="sdpi-item-value" id="cart-number" inputmode="numeric" pattern="[0-9]*" type="number" onChange="updateSettings()">
       </div>
+      <div class="sdpi-item" type="checkbox">
+        <div class="sdpi-item-label">Ignore State</div>
+        <input class="sdpi-item-value" id="cart-alwaysOn" type="checkbox" value="1" onChange="updateSettings()">
+        <label for="cart-alwaysOn"><span></span>Enable button when OFF AIR</label>
+      </div>    
     </div>
 
     <div id="settings-command" style="display:none">

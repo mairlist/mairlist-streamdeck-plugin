@@ -16,11 +16,12 @@ function connectElgatoStreamDeckSocket(inPort, inUUID, inRegisterEvent, inInfo, 
   switch (actionInfo.action) {
     case ACTION_CART:
       document.getElementById("settings-cart").style.display = "block";
-      document.getElementById("cart-number").value = settings.number || '';
+      document.getElementById("cart-number").value = settings.number || "";
+      document.getElementById("cart-alwaysOn").checked = settings.alwaysOn;
       break;
     case ACTION_COMMAND:
       document.getElementById("settings-command").style.display = "block";
-      document.getElementById("command-command").value = settings.command || '';
+      document.getElementById("command-command").value = settings.command || "";
       break;
   }
 
@@ -94,6 +95,7 @@ function updateSettings() {
   switch (actionInfo.action) {
     case ACTION_CART:
       settings.number = document.getElementById("cart-number").value;
+      settings.alwaysOn = document.getElementById("cart-alwaysOn").checked;
       break;
     case ACTION_COMMAND:
       settings.command = document.getElementById("command-command").value;

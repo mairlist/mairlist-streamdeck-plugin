@@ -18,6 +18,12 @@ class CartAction extends Action {
   
     if (! this.connection.connected)
       color = "black"
+    else if (! (this.settings.alwaysOn ||
+               (this.connection.cartwallMode == "OnAir") ||
+               (this.connection.cartwallMode == "PFL") ||
+               (this.connection.cartwallMode == "VT"))
+            )
+      color = "black"
     else 
       switch (this.connection.cartPlayerStates[cartIndex]) {
         case "Playing":

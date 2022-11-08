@@ -16,6 +16,7 @@ class UpstreamConnection {
     this.allActions = {};
     
     this.cartPlayerStates = {};
+    this.cartwallMode = "";
   }
   
   // Helper functions
@@ -84,6 +85,11 @@ class UpstreamConnection {
     }
   }
   
+  updateActions(actionClass) {
+    for (const ctx in this.actions[actionClass]) 
+      this.actions[actionClass][ctx].update();
+  }
+
   updateAllActions() {
     for (const ctx in this.allActions) 
       this.allActions[ctx].update();
@@ -93,6 +99,12 @@ class UpstreamConnection {
   // Handler for all incoming "state" messages from upstream
   handleStateMessage(msg) {
   
+    if (msg.p == "Cartwall/Mode") {
+      this.cartwallMode = msg.v;
+      this.updateActions(ACTION_CART);
+      return;
+    }
+    
     var m = msg.p.match(/^Cartwall\/Players\/Player (\d+)\/(.*)/);
 
     if (m) {
