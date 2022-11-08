@@ -62,10 +62,6 @@ class UpstreamConnection {
   
     this.websocket.onerror = (evt) => {
       console.log("Upstream connection error");
-      this.connected = false;
-      this.updateAllActions();
-      if (! this.shuttingDown) 
-        tryReconnect(this);
     }
 
     this.websocket.onclose = () => {
