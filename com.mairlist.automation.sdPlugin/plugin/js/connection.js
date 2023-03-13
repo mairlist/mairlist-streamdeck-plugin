@@ -108,11 +108,13 @@ class UpstreamConnection {
     const m = msg.p.match(/^Cartwall\/Players\/Player (\d+)\/(.*)/);
 
     if (m) {
-      var idx = m[1];
-      var param = m[2];
-    
-      if (param == 'State') {
-        this.cartPlayerStates[idx] = msg.v;
+      const idx = m[1];
+      const param = m[2];
+      if(!this.cartPlayerStates[idx]) {
+        this.cartPlayerStates[idx] = {}
+      }
+      if (param == 'State' || param === 'Title') {
+        this.cartPlayerStates[idx][param.toLowerCase()] = msg.v;
         
         for (const ctx in this.actions[ACTION_CART]) {
           const action = this.actions[ACTION_CART][ctx];

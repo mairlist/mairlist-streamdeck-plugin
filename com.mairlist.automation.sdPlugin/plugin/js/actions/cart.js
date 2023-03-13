@@ -8,13 +8,13 @@ class CartAction extends Action {
     super.update();
   
     // Check is the cart number is configured
-    var cartIndex = this.settings.number;
-    if (cartIndex == undefined) {
+    const cartIndex = this.settings.number;
+    if (cartIndex === undefined) {
       return;
     }
   
     // Determine color
-    var color;
+    let color;
   
     if (! this.connection.connected)
       color = "black"
@@ -25,34 +25,33 @@ class CartAction extends Action {
             )
       color = "black"
     else 
-      switch (this.connection.cartPlayerStates[cartIndex]) {
+      switch (this.connection.cartPlayerStates[cartIndex].state) {
         case "Playing":
-          color = "red";
+          color = "#E74C3C";
           break;
         case "Fading":
-          color = "red";
+          color = "#E67E22";
           break;
         case "Stopped":
-          color = "green";
+          color = "#27AE60";
           break;
         default:
-          color = "black";
+          color = "#7F8C8D";
       }
       
       
     // Generate SVG
-    var fontSize = 64;
-    var textY = 70;
-    if ((this.connection.cartPlayerStates.length >= 10) || (cartIndex >= 10)) {
-      fontSize = 48;
-      textY = 62;
-    }
-    var svg = 
-      "data:image/svg+xml;charset=utf8," +
-      "<svg height=\"100\" width=\"100\">" +
-      "<circle cx=\"50\" cy=\"50\" r=\"40\" stroke=\"black\" stroke-width=\"3\" fill=\"" + color + "\" />" +
-      "<text x=\"50\" y=\"" + textY + "\" text-anchor=\"middle\" font-size=\"" + fontSize + "px\" font-weight=\"bold\" fill=\"white\">" + cartIndex + "</text>" +
-      "</svg>";
+    let cartText = this.connection.cartPlayerStates[cartIndex].title
+    const noTitle = cartText === ""
+    const fontSize = noTitle ?  64 : 17;
+    cartText = noTitle ? cartIndex : cartText;
+    
+    const svg = 
+      `data:image/svg+xml;charset=utf8,
+      <svg height="100" width="100">
+      <rect x="5" y="5" width="90" height="90" rx="15" stroke="none" stroke-width="0" fill="${color}" />
+      <textArea x="6" y="10" width="88" height="90" alignment-baseline="middle" text-anchor="middle" font-size="${fontSize}px" font-weight="bold" fill="white"> ${cartText} </textArea>
+      </svg>`;
 
     // Send to SD  
     this.connection.sendToSD({
