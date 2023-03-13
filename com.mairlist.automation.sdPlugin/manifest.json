@@ -10,7 +10,7 @@
   "Category": "mAirList", 
   "CategoryIcon": "icons/category", 
   "URL": "https://www.mairlist.com", 
-  "Version": "1.4",
+  "Version": "1.4.1",
   "OS": [
     {
         "Platform": "mac", 

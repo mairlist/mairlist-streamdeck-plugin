@@ -3,7 +3,7 @@ function connectElgatoStreamDeckSocket(inPort, inPluginUUID, inRegisterEvent, in
   var upstream = null;
 
   // Open the web socket
-  var websocket = new WebSocket("ws://127.0.0.1:" + inPort);
+  const websocket = new WebSocket("ws://127.0.0.1:" + inPort);
 
   websocket.onopen = function() {
     // Register
