@@ -15,6 +15,8 @@ class CartAction extends Action {
   
     // Determine color
     let color;
+    let cartText = cartIndex
+    let fontSize = 64
   
     if (! this.connection.connected)
       color = "black"
@@ -41,10 +43,12 @@ class CartAction extends Action {
       
       
     // Generate SVG
-    let cartText = this.connection.cartPlayerStates[cartIndex].title
-    const noTitle = cartText === ""
-    const fontSize = noTitle ?  64 : 17;
-    cartText = noTitle ? cartIndex : cartText;
+    if (this.connection.connected) {
+      if (this.connection.cartPlayerStates[cartIndex].title !== "") {
+        cartText = this.connection.cartPlayerStates[cartIndex].title;
+        fontSize = 17;
+      }
+    }
     
     const svg = 
       `data:image/svg+xml;charset=utf8,
