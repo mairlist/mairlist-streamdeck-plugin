@@ -44,7 +44,7 @@ class CartAction extends Action {
       
     // Generate SVG
     if (this.connection.connected) {
-      if (this.connection.cartPlayerStates[cartIndex].title !== "") {
+      if (this.connection.cartPlayerStates[cartIndex].title !== "" && this.settings.showText) {
         cartText = this.connection.cartPlayerStates[cartIndex].title;
         fontSize = 17;
       }
