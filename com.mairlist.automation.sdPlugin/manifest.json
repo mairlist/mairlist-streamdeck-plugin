@@ -10,7 +10,7 @@
   "Category": "mAirList", 
   "CategoryIcon": "icons/category", 
   "URL": "https://www.mairlist.com", 
-  "Version": "1.4",
+  "Version": "1.4.1",
   "OS": [
     {
         "Platform": "mac", 
@@ -31,6 +31,7 @@
       "UUID": "com.mairlist.automation.actions.cart",
       "Name": "Cart Player", 
       "Icon": "icons/actions/cart", 
+      "UserTitleEnabled": false,
       "States": [
         {
           "Image": "icons/state/cart",

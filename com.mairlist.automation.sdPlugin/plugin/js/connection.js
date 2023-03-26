@@ -49,7 +49,7 @@ class UpstreamConnection {
 
     var host = this.settings.host || DEFAULT_HOST;
     var port = this.settings.port || DEFAULT_PORT;
-    var url = "ws://" + host + ":" + port + "/ws";
+    var url = `ws://${host}:${port}/ws`;
 
     console.log("Upstream connecting to " + url);
 
@@ -77,7 +77,7 @@ class UpstreamConnection {
     }
   
     this.websocket.onmessage = (evt) => {
-      var msg = JSON.parse(evt.data);
+      const msg = JSON.parse(evt.data);
     
       if (msg.msg == 'state') {
         this.handleStateMessage(msg);
@@ -105,14 +105,16 @@ class UpstreamConnection {
       return;
     }
     
-    var m = msg.p.match(/^Cartwall\/Players\/Player (\d+)\/(.*)/);
+    const m = msg.p.match(/^Cartwall\/Players\/Player (\d+)\/(.*)/);
 
     if (m) {
-      var idx = m[1];
-      var param = m[2];
-    
-      if (param == 'State') {
-        this.cartPlayerStates[idx] = msg.v;
+      const idx = m[1];
+      const param = m[2];
+      if(!this.cartPlayerStates[idx]) {
+        this.cartPlayerStates[idx] = {}
+      }
+      if (param == 'State' || param === 'Title') {
+        this.cartPlayerStates[idx][param.toLowerCase()] = msg.v;
         
         for (const ctx in this.actions[ACTION_CART]) {
           const action = this.actions[ACTION_CART][ctx];
@@ -127,7 +129,7 @@ class UpstreamConnection {
   
   // Called when an action appears
   willAppear(data) {
-    var action = null;
+    let action;
     
     // Create action object, based on type
     switch (data.action) {
@@ -179,7 +181,7 @@ class UpstreamConnection {
   // Called when new global settings are received 
   didReceiveGlobalSettings(settings) {
   
-    var mustReconnect = 
+    const mustReconnect = 
       (this.settings.host != settings.host) ||
       (this.settings.port != settings.port);
       
