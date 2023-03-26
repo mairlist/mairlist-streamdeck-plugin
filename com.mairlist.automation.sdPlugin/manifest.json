@@ -31,6 +31,7 @@
       "UUID": "com.mairlist.automation.actions.cart",
       "Name": "Cart Player", 
       "Icon": "icons/actions/cart", 
+      "UserTitleEnabled": false,
       "States": [
         {
           "Image": "icons/state/cart",
